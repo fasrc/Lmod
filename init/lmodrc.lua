@@ -26,3 +26,9 @@ propT = {
       },
    },
 }
+scDescriptT = {
+  {
+    ["dir"] = "/n/sw/fasrcsw/moduledata/cacheDir",
+    ["timestamp"] = "/n/sw/fasrcsw/moduledata/system.txt",
+  },
+}
