@@ -18,11 +18,16 @@ if ( $?histchars) then
   endif
 endif
 
+alias modulelogger 'if ( "\!*" =~ "load ?*" ) echo "$FASRCSW_PROD"/modulehook/modulelogger -s cli -a load -u "$USER" \!*; endif'
+
 if ($?tcsh) then
-  alias module  $prefix'eval `$LMOD_CMD csh '$midfix $histchar'*` '$postfix' eval `$LMOD_SETTARG_CMD -s csh`'
+  alias __module  $prefix'unsetenv _MODULE_LOAD_SUCCESS; eval `$LMOD_CMD csh '$midfix $histchar'*` && setenv _MODULE_LOAD_SUCCESS '$postfix' eval `$LMOD_SETTARG_CMD -s csh`'
 else
-  alias module  $prefix'eval `$LMOD_CMD csh '$midfix $histchar'*` '$postfix
+  alias __module  $prefix'unsetenv _MODULE_LOAD_SUCCESS; eval `$LMOD_CMD csh '$midfix $histchar'*` && setenv _MODULE_LOAD_SUCCESS '$postfix
 endif
+
+alias module '__module \!*; eval `if ($?_MODULE_LOAD_SUCCESS) echo modulelogger \!*`'
+
 alias clearMT 'eval `'$LMOD_DIR/clearMT_cmd csh'`'
 
 alias ml      'eval `'$LMOD_DIR/ml_cmd' '$histchar'*`'
