@@ -18,7 +18,7 @@ if ( $?histchars) then
   endif
 endif
 
-alias modulelogger 'if ( "\!*" =~ "load ?*" ) echo "$FASRCSW_PROD"/modulehook/modulelogger -s cli -a load -u "$USER" \!*; endif'
+alias modulelogger 'if ( "\!*" =~ "load ?*" ) "$FASRCSW_PROD"/modulehook/modulelogger -s cli -a load -u "$USER" \!*; endif'
 
 if ($?tcsh) then
   alias __module  $prefix'unsetenv _MODULE_LOAD_SUCCESS; eval `$LMOD_CMD csh '$midfix $histchar'*` && setenv _MODULE_LOAD_SUCCESS '$postfix' eval `$LMOD_SETTARG_CMD -s csh`'
